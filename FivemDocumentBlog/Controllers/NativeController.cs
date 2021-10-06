@@ -27,12 +27,5 @@ namespace FivemDocumentBlog.Controllers
             return Ok(data);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            var native = await _nativeService.GetNativeByIdAsync(id);
-            return Ok(native);
-        }
-
     }
 }
