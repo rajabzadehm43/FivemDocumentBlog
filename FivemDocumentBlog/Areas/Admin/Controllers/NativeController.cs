@@ -74,7 +74,7 @@ namespace FivemDocumentBlog.Areas.Admin.Controllers
                 ShortDescription = native.ShortDescription,
                 CategoryId = native.CategoryId,
                 SampleCode = native.SampleCode,
-                Description = native.SampleCode,
+                Description = native.Description,
                 NativeName = native.NativeName,
                 NativeId = native.NativeId
             };
