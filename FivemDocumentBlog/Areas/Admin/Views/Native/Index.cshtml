@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Mvc.Diagnostics
+@model ViewModels.Admin.Docs.AdminIndexNativeViewModel
+@{
+    ViewData["Title"] = "توابع";
+    ViewData["Meta-Title"] = "نمایش توابع";
+    var index = 1;
+    
+    var qPrefix = "";
+    if (!string.IsNullOrEmpty(Model.Q))
+    {
+        qPrefix = $"&q={Model.Q}";
+    }
+}
+
+@section Router
+{
+    <li><a href="/Admin/"><i class="fa fa-dashboard"></i> خانه</a></li>
+    <li><a asp-area="Admin" asp-controller="Native" asp-action="Index"> توابع</a></li>
+    <li class="active">نمایش توابع</li>
+}
+
+<div class="col-xs-12">
+    <div class="box box-info">
+
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                لیست توابع
+            </h3>
+            <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <form asp-action="Index" method="get" style="display: contents">
+                        <input type="text" name="q" value="@Model.Q" class="form-control pull-right" placeholder="جستجو">
+
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-body">
+
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>نام تابع</th>
+                        <th>استفاده</th>
+                        <th>فعالیت</th>
+                    </tr>
+
+                    @foreach (var item in Model.Natives)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.NativeName</td>
+                            <td>
+                                @item.ApiSet.Name
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.NativeId" class="btn btn-warning btn-sm">ویرایش</a> |
+                                <a asp-action="Remove" asp-route-id="@item.NativeId" class="btn btn-danger btn-sm">حذف</a>
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                </tbody>
+            </table>
+
+            <div class="box-footer">
+                @if (Model.AllPages > 1)
+                {
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        @if (Model.Page > 1)
+                        {
+                            <li><a href="?page=@(Model.Page - 1)@qPrefix">«</a></li>
+                        }
+                        @for (index = 1; index <= Model.AllPages; index++)
+                        {
+                            <li><a href="?page=@index@qPrefix">@index</a></li>
+                        }
+                        @if (Model.Page < Model.AllPages)
+                        {
+                            <li><a href="?page=@(Model.Page + 1)@qPrefix">»</a></li>
+                        }
+                    </ul>
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        var sideEl = document.getElementById("sidebar-native")
+        sideEl.classList.add("active");
+    </script>
+}

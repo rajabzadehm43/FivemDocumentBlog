@@ -1,0 +1,137 @@
+﻿@using Models.DocsModels
+@using Services.Interfaces.Docs
+
+@inject INativeApiService _apiService
+@inject INativeCategoryService _categoryService
+
+@model ViewModels.Docs.AdminEditNativeViewModel
+
+@{
+    ViewData["Title"] = "توابع و مستندات";
+    ViewData["Meta-Title"] = "ویرایش " + Model.NativeName;
+
+    List<NativeApiSet> apiSets = await _apiService.GetAllApiSetsAsync();
+    List<NativeCategory> categories = await _categoryService.GetAllCategoriesAsync();
+}
+
+@section Router
+{
+    <li><a href="/Admin/"><i class="fa fa-dashboard"></i> خانه</a></li>
+    <li><a asp-area="Admin" asp-controller="Native" asp-action="Index"> توابع</a></li>
+    <li class="active">ویرایش تابع</li>
+}
+
+<div class="col-xl-12">
+    <div class="box box-info">
+
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                ویرایش @Model.NativeName
+            </h3>
+        </div>
+
+        <div class="box-body">
+
+            <form method="post">
+
+                @Html.HiddenFor(c => c.NativeId)
+
+                <div class="col-xs-12 col-md-9">
+
+                    <div class="form-group">
+                        <label asp-for="NativeName"></label>
+                        <input asp-for="NativeName" class="form-control" placeholder="مثالا RegisterCommad" />
+                        <span asp-validation-for="NativeName" class="text-danger text-sm"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ShortDescription"></label>
+                        <textarea rows="5" asp-for="ShortDescription" class="form-control"></textarea>
+                        <span asp-validation-for="ShortDescription" class="text-danger text-sm"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea rows="15" asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger text-sm"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="SampleCode"></label>
+                        <textarea rows="15" asp-for="SampleCode" class="form-control"></textarea>
+                        <span asp-validation-for="SampleCode" class="text-danger text-sm"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="ویرایش" class="btn btn-warning btn-block" />
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-md-3">
+
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                داده های زیر دسته
+                            </h3>
+                        </div>
+
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label asp-for="ApiSetId"></label>
+                                <select asp-for="ApiSetId" class="form-control">
+                                    <option value="@null">انتخاب Api</option>
+                                    @foreach (var item in apiSets)
+                                    {
+                                        if (item.ApiSetId != Model.ApiSetId)
+                                        {
+                                            <option value="@item.ApiSetId">@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.ApiSetId" selected="">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="ApiSetId" class="text-danger text-sm"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CategoryId"></label>
+                                <select asp-for="CategoryId" class="form-control">
+                                    <option value="@null">انتخاب دسته</option>
+                                    @foreach (var item in categories)
+                                    {
+                                        if (item.CategoryId != Model.CategoryId)
+                                        {
+                                            <option value="@item.CategoryId">@item.CategoryName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.CategoryId" selected="">@item.CategoryName</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger text-sm"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        var sideEl = document.getElementById("sidebar-native")
+        sideEl.classList.add("active");
+    </script>
+}
