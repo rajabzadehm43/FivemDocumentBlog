@@ -119,7 +119,7 @@
                         </div>
 
                     </div>
-                    
+
                     <div class="panel panel-primary">
 
                         <div class="panel-heading">
@@ -148,8 +148,17 @@
 
 @section Scripts
 {
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
+
     <script>
-        var sideEl = document.getElementById("sidebar-native")
-        sideEl.classList.add("active");
+        const descEditor = ClassicEditor
+            .create(document.querySelector('#Description'),
+                {
+                    language: "ar",
+                    ckfinder: {
+                        uploadUrl: '@Url.Action("UploadImage")'
+                    }
+                });
     </script>
 }

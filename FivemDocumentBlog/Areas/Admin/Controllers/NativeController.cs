@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.DocsModels;
 using Services.Interfaces.Docs;
@@ -44,6 +45,22 @@ namespace FivemDocumentBlog.Areas.Admin.Controllers
             };
             return View(model);
         }
+
+        #region Upload Image
+
+        public async Task<IActionResult> UploadImage(IFormFile upload)
+        {
+            var result = await _nativeService.SaveNativeDescriptionFile(upload);
+            return Ok(new
+            {
+                Uploaded = 1,
+                FileName = result.Item2,
+                Url = result.Item1
+            });
+        }
+
+
+        #endregion
 
         #region Create Native
 

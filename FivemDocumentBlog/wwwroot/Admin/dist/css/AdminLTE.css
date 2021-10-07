@@ -4990,3 +4990,7 @@ table.text-center th {
     font-size: 18px;
     direction: ltr;
 }
+
+.ck-editor__main, .ck-content {
+    min-height: 300px;
+}

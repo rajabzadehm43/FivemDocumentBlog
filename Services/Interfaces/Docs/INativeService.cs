@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Models.DocsModels;
 using ViewModels.Docs;
 
@@ -17,6 +18,7 @@ namespace Services.Interfaces.Docs
 
         Task AddNativeAsync(Native native);
         Task<Native> AddNativeAsync(AdminAddNativeViewModel model);
+        Task<Tuple<string, string>> SaveNativeDescriptionFile(IFormFile file);
 
         Task UpdateNativeAsync(Native native);
         Task<Native> UpdateNativeAsync(AdminEditNativeViewModel model);

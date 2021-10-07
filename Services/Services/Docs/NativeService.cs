@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Transactions;
 using Dapper;
+using Microsoft.AspNetCore.Http;
 using Models.DocsModels;
 using Services.Interfaces.Docs;
 using ViewModels.Docs;
@@ -18,6 +19,7 @@ namespace Services.Services.Docs
     {
         private readonly IDbConnection _db;
         private readonly string _baseNativesImage;
+        private readonly string _baseNativeDescImage;
 
         private readonly INativeTagService _tagService;
 
@@ -29,9 +31,15 @@ namespace Services.Services.Docs
 
         private NativeService()
         {
-            _baseNativesImage = Path.Join(Directory.GetCurrentDirectory(), "Images/Natives/");
+            _baseNativesImage = Path.Join(Directory.GetCurrentDirectory(), "wwwroot/Images/Natives/");
+            _baseNativeDescImage = Path.Join(Directory.GetCurrentDirectory(), "wwwroot/Images/Natives/Description");
+            
             if (!Directory.Exists(_baseNativesImage))
                 Directory.CreateDirectory(_baseNativesImage);
+
+            if (!Directory.Exists(_baseNativeDescImage))
+                Directory.CreateDirectory(_baseNativeDescImage);
+
         }
 
         public async Task<List<Native>> GetNativesAsync()
@@ -134,6 +142,19 @@ namespace Services.Services.Docs
             await _tagService.AddTagsAsync(tags.ToList());
 
             return newNative;
+        }
+
+        public async Task<Tuple<string, string>> SaveNativeDescriptionFile(IFormFile file)
+        {
+            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+            var fullPath = Path.Join(_baseNativeDescImage, fileName);
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return new Tuple<string, string>($"/Images/Natives/Description/{fileName}", fileName);
         }
 
         public async Task UpdateNativeAsync(Native native)
