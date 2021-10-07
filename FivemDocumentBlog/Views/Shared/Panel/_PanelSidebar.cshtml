@@ -9,6 +9,8 @@
     </li>
 
     <li class="header">مدیریت محتوا</li>
+
+    <!-- Natives -->
     <li class="treeview" id="sidebar-native">
         <a href="#">
             <i class="fa fa-link"></i> <span>توابع</span>
@@ -22,8 +24,19 @@
         </ul>
     </li>
 
-
-
+    <!-- Native Api Sets -->
+    <li class="treeview" id="sidebar-native-api-set">
+        <a href="#">
+            <i class="fa fa-link"></i> <span>ApiSet</span>
+            <span class="pull-left-container">
+                <i class="fa fa-angle-right pull-left"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a asp-controller="NativeApi" asp-action="Index">همه Api ها</a></li>
+            <li><a asp-controller="NativeApi" asp-action="Create">افزودن ApiSet</a></li>
+        </ul>
+    </li>
 
 
 

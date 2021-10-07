@@ -1,0 +1,48 @@
+﻿@model List<Models.DocsModels.NativeApiSet>
+@{
+    ViewData["Title"] = "موارد قابل استفاده";
+    ViewData["Meta-Title"] = "نمایش همه";
+    var index = 1;
+}
+
+@section Router
+{
+    <li><a href="/Admin/"><i class="fa fa-dashboard"></i> خانه</a></li>
+    <li><a asp-area="Admin" asp-controller="NativeApi" asp-action="Index"> موارد قابل استفاده</a></li>
+    <li class="active">نمایش همه</li>
+}
+
+<div class="box box-info">
+
+    <div class="box-header with-border">
+        <h3 class="box-title">نمایش همه</h3>
+    </div>
+
+    <div class="box-body">
+
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>نام Api</th>
+                    <th>فعالیت</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ApiSetId" class="btn btn-warning btn-sm">ویرایش</a> |
+                            <a asp-action="Remove" asp-route-id="@item.ApiSetId" class="btn btn-danger btn-sm">حذف</a>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
