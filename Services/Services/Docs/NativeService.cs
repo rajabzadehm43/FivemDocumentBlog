@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using System.Transactions;
 using Dapper;
 using Models.DocsModels;
 using Services.Interfaces.Docs;
@@ -18,9 +19,12 @@ namespace Services.Services.Docs
         private readonly IDbConnection _db;
         private readonly string _baseNativesImage;
 
-        public NativeService(IDbConnection db)
+        private readonly INativeTagService _tagService;
+
+        public NativeService(IDbConnection db, INativeTagService tagService) : this()
         {
             _db = db;
+            _tagService = tagService;
         }
 
         private NativeService()
@@ -39,13 +43,13 @@ namespace Services.Services.Docs
         public async Task<List<Native>> GetTopNativesAsync(int take = 10)
         {
             var query = "SELECT Top(@take) * FROM Natives";
-            return (await _db.QueryAsync<Native>(query, new {take = take})).ToList();
+            return (await _db.QueryAsync<Native>(query, new { take = take })).ToList();
         }
 
         public async Task<Native> GetNativeByIdAsync(int id)
         {
             var query = "Select * From Natives Where NativeId = @Id";
-            var result = await _db.QueryFirstAsync<Native>(query, new {Id = id});
+            var result = await _db.QueryFirstAsync<Native>(query, new { Id = id });
             return result;
         }
 
@@ -92,6 +96,7 @@ namespace Services.Services.Docs
         public async Task<Native> AddNativeAsync(AdminAddNativeViewModel model)
         {
 
+            // Create New Native
             var newNative = new Native
             {
                 Description = model.Description,
@@ -102,6 +107,7 @@ namespace Services.Services.Docs
                 CategoryId = model.CategoryId.Value
             };
 
+            // Image Process [Currently Not Have Image]
             if (model.ImageFile != null)
             {
                 var fileName = Guid.NewGuid() + Path.GetExtension(model.ImageFile.FileName);
@@ -115,7 +121,18 @@ namespace Services.Services.Docs
                 newNative.ImageName = fileName;
             }
 
+            // Process Tags
+            var tags = model.Tags.Split("-")
+                .Select(t => new NativeTag
+                {
+                    Tag = t.Trim(),
+                    Native = newNative
+                });
+
+            // Saving Data
             await AddNativeAsync(newNative);
+            await _tagService.AddTagsAsync(tags.ToList());
+
             return newNative;
         }
 
@@ -131,6 +148,7 @@ namespace Services.Services.Docs
         public async Task<Native> UpdateNativeAsync(AdminEditNativeViewModel model)
         {
 
+            // Load Native
             var native = await GetNativeByIdAsync(model.NativeId.Value);
 
             // Image Process
@@ -153,6 +171,7 @@ namespace Services.Services.Docs
                 native.ImageName = fileName;
             }
 
+            // Update Native
             native.ShortDescription = model.ShortDescription;
             native.Description = model.Description;
             native.NativeName = model.NativeName;
@@ -160,14 +179,26 @@ namespace Services.Services.Docs
             native.ApiSetId = model.ApiSetId.Value;
             native.CategoryId = model.CategoryId.Value;
 
+            // Process Tags
+            var tags = model.Tags.Split("-")
+                .Select(c => new NativeTag
+                {
+                    Tag = c.Trim(),
+                    NativeId = native.NativeId,
+                });
+
             await UpdateNativeAsync(native);
+
+            await _tagService.RemoveTagsByNativeId(native.NativeId);
+            await _tagService.AddTagsAsync(tags.ToList());
+
             return native;
         }
 
         public async Task RemoveNative(int id)
         {
             var query = "Delete From Natives Where NativeId = @NativeId";
-            await _db.ExecuteAsync(query, new {NativeId = id});
+            await _db.ExecuteAsync(query, new { NativeId = id });
         }
     }
 }

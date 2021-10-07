@@ -119,6 +119,24 @@
                         </div>
 
                     </div>
+                    
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">برچسب ها</h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <label asp-for="Tags"></label>
+                                <textarea asp-for="Tags" placeholder="با '-' جدا شود" rows="3" class="form-control"></textarea>
+                                <span asp-validation-for="Tags" class="text-danger text-sm"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
             </form>

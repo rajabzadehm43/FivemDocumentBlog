@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Http;
 using Models.DocsModels;
 
@@ -34,5 +35,10 @@ namespace ViewModels.Docs
 
         [DisplayName("کد مثال")]
         public string SampleCode { get; set; }
+
+        [AllowNull]
+        [DisplayName("برچسب ها")]
+        public string Tags { get; set; }
+
     }
 }

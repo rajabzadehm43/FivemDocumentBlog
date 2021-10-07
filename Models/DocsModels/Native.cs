@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models.DocsModels
 {
@@ -34,6 +35,8 @@ namespace Models.DocsModels
         public NativeApiSet ApiSet { get; set; }
         
         public NativeCategory Category { get; set; }
+
+        public List<NativeTag> Tags { get; set; }
 
         #endregion
 

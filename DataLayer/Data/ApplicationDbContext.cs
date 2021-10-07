@@ -15,6 +15,7 @@ namespace DataLayer.Data
         public DbSet<Native> Natives { get; set; }
         public DbSet<NativeApiSet> NativeApiSets { get; set; }
         public DbSet<NativeCategory> NativeCategories { get; set; }
+        public DbSet<NativeTag> NativeTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,9 +31,11 @@ namespace DataLayer.Data
                 .HasForeignKey(c => c.CategoryId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            /*.HasOne(n => n.ApiSet)
-            .WithMany(ap => ap.Natives)
-            .HasForeignKey(n => n.ApiSetId);*/
+            builder.Entity<Native>()
+                .HasMany(t => t.Tags)
+                .WithOne(t => t.Native)
+                .HasForeignKey(t => t.NativeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             base.OnModelCreating(builder);
         }

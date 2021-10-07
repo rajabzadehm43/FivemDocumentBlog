@@ -53,6 +53,7 @@ namespace FivemDocumentBlog
             services.AddScoped<INativeService, NativeService>();
             services.AddScoped<INativeApiService, NativeApiService>();
             services.AddScoped<INativeCategoryService, NativeCategoryService>();
+            services.AddScoped<INativeTagService, NativeTagService>();
 
             #endregion
 

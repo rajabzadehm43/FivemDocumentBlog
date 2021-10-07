@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using System.Transactions;
+using Dapper;
 using DataLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Models.DocsModels;
@@ -20,12 +23,16 @@ namespace FivemDocumentBlog.Controllers
         private readonly INativeService _service;
 
         private readonly ApplicationDbContext _context;
+        private readonly IDbConnection _db;
+        private readonly INativeTagService _tagService;
 
-        public HomeController(ILogger<HomeController> logger, INativeService service, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, INativeService service, ApplicationDbContext context, IDbConnection db, INativeTagService tagService)
         {
             _logger = logger;
             _service = service;
             _context = context;
+            _db = db;
+            _tagService = tagService;
         }
 
         public IActionResult Index()
@@ -35,13 +42,6 @@ namespace FivemDocumentBlog.Controllers
 
         public async Task<IActionResult> Privacy()
         {
-            // var ss = _context.Natives.Skip(10).Take(60).ToList();
-            var ss = await _service.GetNativesByPagingAsync();
-
-            var dataEF = _context.Natives
-                // .Include(c => c.ApiSet)
-                .ToList();
-
             return View();
         }
 

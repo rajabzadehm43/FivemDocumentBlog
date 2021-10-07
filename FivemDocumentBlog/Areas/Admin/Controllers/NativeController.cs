@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Models.DocsModels;
@@ -14,14 +16,12 @@ namespace FivemDocumentBlog.Areas.Admin.Controllers
     {
 
         private readonly INativeService _nativeService;
-        private readonly INativeApiService _apiService;
-        private readonly INativeCategoryService _categoryService;
+        private readonly INativeTagService _tagService;
 
-        public NativeController(INativeService nativeService, INativeApiService apiService, INativeCategoryService categoryService)
+        public NativeController(INativeService nativeService, INativeTagService tagService)
         {
             _nativeService = nativeService;
-            _apiService = apiService;
-            _categoryService = categoryService;
+            _tagService = tagService;
         }
 
         [HttpGet]
@@ -68,6 +68,9 @@ namespace FivemDocumentBlog.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var native = await _nativeService.GetNativeByIdAsync(id);
+            var tags = (await _tagService.GetAllTagsByNativeIdAsync(id))
+                .Select(t => t.Tag);
+
             var model = new AdminEditNativeViewModel
             {
                 ApiSetId = native.ApiSetId,
@@ -76,7 +79,8 @@ namespace FivemDocumentBlog.Areas.Admin.Controllers
                 SampleCode = native.SampleCode,
                 Description = native.Description,
                 NativeName = native.NativeName,
-                NativeId = native.NativeId
+                NativeId = native.NativeId,
+                Tags = string.Join(" - ", tags)
             };
             return View(model);
         }
