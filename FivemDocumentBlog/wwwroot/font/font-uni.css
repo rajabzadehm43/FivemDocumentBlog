@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'discord';
+  src: url('UniSansHeavyCAPS.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.text-discord {
+  font-family: 'discord';
+}
+
+.text-14 {
+  font-size: 14px;
+}
+
+.text-25 {
+  font-size: 25px;
+}

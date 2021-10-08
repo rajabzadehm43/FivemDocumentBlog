@@ -1,0 +1,414 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: "IRANsans" !important;
+  font-size: 14px;
+  background: #F7F7F7 !important;
+  /* height: 100vh; */
+  direction: rtl;
+}
+
+header {
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 7px rgba(242, 244, 249, 0.75);
+  overflow-x: hidden;
+}
+
+.head-info {
+  color: #636363;
+  margin-right: 10px;
+}
+
+@media (max-width: 490px) {
+  .head-info {
+    display: block;
+    margin-right: 0;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .heade-logo {
+    text-align: center;
+    display: block;
+  }
+}
+.menu-list {
+  margin-top: 15px;
+  font-size: 14px;
+}
+.menu-list a,
+.menu-list span {
+  color: #3e3e3e;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.menu-list a:hover,
+.menu-list span:hover {
+  color: #030303;
+}
+
+.menu-list-item {
+  white-space: nowrap;
+  margin-left: 20px;
+}
+.menu-list-item:last-child {
+  margin-left: 0px;
+}
+
+.menu-list-container {
+  margin-bottom: 0rem !important;
+  padding-left: 0rem !important;
+  list-style-type: none !important;
+  display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.toogle-menu-list {
+  border: 0;
+  padding-bottom: 0px;
+  border-radius: 5px;
+  background: whitesmoke;
+  width: 30px;
+  height: 30px;
+  display: none;
+}
+.toogle-menu-list i {
+  transform: translateY(2px);
+}
+
+.menu-list-parent {
+  overflow-x: hidden;
+}
+
+[device=Mobile].active {
+  overflow: hidden;
+}
+[device=Mobile] #btn-toggle-menu-list {
+  display: block !important;
+}
+[device=Mobile] .menu-list-parent {
+  position: absolute !important;
+  right: -100%;
+  top: 120px;
+  transition: all 0.4s;
+  height: calc(100% - 121.8px);
+}
+[device=Mobile] .menu-list-parent.active {
+  right: 0px;
+}
+[device=Mobile] #menu-list {
+  display: block !important;
+  background: white !important;
+  height: 100% !important;
+  width: 255px !important;
+  padding: 20px !important;
+  overflow-y: auto;
+}
+[device=Mobile] .menu-list-item {
+  margin-left: 0px !important;
+  margin-top: 20px !important;
+  padding: 13px;
+  background: #fafafa;
+  border-radius: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+[device=Mobile] .menu-list-item:first-child {
+  margin-top: 0px !important;
+}
+
+.box-shadow {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(242, 244, 249, 0.75);
+}
+
+.box-shadow-header {
+  padding: 20px;
+}
+
+.function-name {
+  text-align: left;
+  font-family: consolas;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 1px 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: ltr;
+}
+.function-name a {
+  color: #030303;
+  transition: all 0.3s;
+}
+.function-name a:hover {
+  color: #0044ff;
+}
+
+.function-details {
+  overflow-x: auto;
+  display: flex;
+}
+
+.function-details-item {
+  font-family: consolas;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 100px;
+  margin: 0px 3px;
+}
+.function-details-item:last-child {
+  margin-left: 0px;
+}
+.function-details-item .function-details-item-circle {
+  width: 100%;
+  height: 5px;
+  border-radius: 18px;
+}
+
+.info.function-details-item-name {
+  outline: 2px solid #0dcaf0;
+  color: #0dcaf0;
+}
+
+.green.function-details-item-name {
+  outline: 2px solid #02b65c;
+  color: #02b65c;
+}
+
+.primery.function-details-item-name {
+  outline: 2px solid #0d6efd;
+  color: #0d6efd;
+}
+
+.warning.function-details-item-name {
+  outline: 2px solid #ffc107;
+  color: #ffc107;
+}
+
+.danger.function-details-item-name {
+  outline: 2px solid #dc3545;
+  color: #dc3545;
+}
+
+.succses.function-details-item-name {
+  outline: 2px solid #198754;
+  color: #198754;
+}
+
+.yellow.function-details-item-name {
+  outline: 2px solid #C4BC1E;
+  color: #C4BC1E;
+}
+
+[item] {
+  cursor: pointer;
+}
+
+.box-shadow-line {
+  background: #F9F7F7;
+  width: 100%;
+  height: 1.5px;
+}
+
+.function-description {
+  padding: 13px 20px;
+  font-size: 14px;
+  text-align: justify;
+  display: none;
+  line-height: 28px;
+  color: #424242;
+}
+
+.function-more, .function-short-des {
+  padding: 20px;
+  font-size: 14px;
+}
+.function-more a, .function-short-des a {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.function-short-des {
+  text-align: left;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+.sidebar-profile-container {
+  display: flex;
+}
+
+.profile-image {
+  width: 70px;
+  height: 70px;
+  background: aqua;
+  border-radius: 5px;
+}
+
+.profile-info {
+  width: calc(100% - 70px);
+  padding-right: 10px;
+  margin-top: 26px;
+}
+.profile-info .profile-info-name, .profile-info .profile-info-skill {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.profile-info .profile-info-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.profile-info .profile-info-skill {
+  font-size: 12px;
+  color: #8d8d8d;
+  margin-top: 5px;
+}
+
+.user-info {
+  font-size: 13px;
+  text-align: justify;
+  line-height: 30px;
+  color: #030303;
+}
+
+.quistion {
+  color: #0044ff;
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr-1 {
+  padding-right: 10px;
+}
+
+.pl-1 {
+  padding-left: 10px;
+}
+
+.quistion-btn {
+  white-space: nowrap;
+  font-size: 13px;
+  background: transparent;
+  color: #424242;
+  border: 0;
+  border-radius: 10px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quistion-btn-ok {
+  background: #fafafa;
+  transition: all 0.3s;
+}
+.quistion-btn-ok:hover {
+  background: whitesmoke;
+}
+
+.box-header {
+  background: whitesmoke;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: consolas;
+  font-weight: bold;
+  display: flex;
+}
+
+.box-header-title {
+  text-align: left;
+  width: 100%;
+}
+
+.shair-btn-parent {
+  width: 20px;
+  border: 0;
+  background: 0;
+  position: relative;
+}
+.shair-btn-parent .top-shair {
+  display: none;
+  position: absolute;
+  white-space: nowrap;
+  border-radius: 10px;
+  right: -59px;
+  margin-top: 10px;
+  padding: 15px;
+  background: #F2F4F9;
+  font-size: 13px;
+  font-family: IRANsans;
+  color: #3e3e3e;
+}
+.shair-btn-parent:hover .top-shair {
+  display: block;
+}
+
+@media (max-width: 431px) {
+  .function-details {
+    display: none !important;
+  }
+
+  .function-name.w-50 {
+    width: 100% !important;
+  }
+}
+.single-body-title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.single-body-text {
+  font-size: 14px;
+  color: #3e3e3e;
+  text-align: justify;
+  line-height: 32px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.creator-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0b75e3;
+}
+
+footer {
+  width: 100%;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 7px rgba(242, 244, 249, 0.75);
+  margin-top: 40px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.footer-set-to-end {
+  position: absolute;
+  bottom: 0px;
+}/*# sourceMappingURL=style.css.map */

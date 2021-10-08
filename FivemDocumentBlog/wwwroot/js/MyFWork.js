@@ -81,9 +81,9 @@ document.querySelectorAll('input[type=file][data-req-type="preview"]')
 // data request #active-link
 document.querySelectorAll('[data-req-type="active-link"]')
     .forEach(function (el) {
-    var _a;
+    var _a, _b;
     var activeLink = (_a = el.getAttribute("data-active-link")) !== null && _a !== void 0 ? _a : el.getAttribute("href");
-    var activeClass = el.getAttribute('data-active-class');
+    var activeClass = (_b = el.getAttribute('data-active-class')) !== null && _b !== void 0 ? _b : "active";
     if (location.pathname === activeLink) {
         el.classList.add(activeClass);
     }

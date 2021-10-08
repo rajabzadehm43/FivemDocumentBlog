@@ -10128,6 +10128,9 @@
     <None Include="wwwroot\Admin\bower_components\tinymce\themes\inlite\theme.min.js" />
     <None Include="wwwroot\Admin\bower_components\tinymce\themes\modern\theme.min.js" />
     <None Include="wwwroot\Admin\bower_components\tinymce\tinymce.min.js" />
+    <None Include="wwwroot\js\MyFWork.js" />
+    <None Include="wwwroot\js\MyFWork.js.map" />
+    <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -10163,6 +10166,10 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="wwwroot\Images\Natives\Description\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\js\MyFWork.ts" />
   </ItemGroup>
 
 </Project>
