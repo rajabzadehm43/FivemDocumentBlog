@@ -1,0 +1,45 @@
+﻿@model ViewModels.Admin.Docs.NativeCategory.AdminAddNativeCategoryViewModel
+@{
+    ViewData["Title"] = "دسته بندی ها";
+    ViewData["Meta-Title"] = "ساخت دسته جدید";
+}
+
+@section Router
+{
+    <li><a href="/Admin/"><i class="fa fa-dashboard"></i> خانه</a></li>
+    <li><a asp-area="Admin" asp-controller="NativeApi" asp-action="Index"> دسته بندی ها</a></li>
+    <li class="active">ساخت دسته جدید</li>
+}
+
+<div class="box box-info">
+    
+    <div class="box-header with-border">
+        <h3 class="box-title">ساخت دسته جدید</h3>
+    </div>
+    
+    <div class="box-body">
+        
+        <form method="post">
+            
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger text-sm"></span>
+            </div>
+        
+            <div class="form-group">
+                <label asp-for="ClassName"></label>
+                <input asp-for="ClassName" value="5d-badge-sucess" class="form-control" />
+                <span asp-validation-for="ClassName" class="text-danger text-sm"></span>
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="ثبت دسته جدید" class="btn btn-success btn-block"/>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+

@@ -38,23 +38,17 @@
         </ul>
     </li>
 
-
-
-
-
-
-    <li><a href="#"><i class="fa fa-link"></i> <span>لینک</span></a></li>
-    <li><a href="#"><i class="fa fa-link"></i> <span>لینک ۲</span></a></li>
-    <li class="treeview">
+    <!-- Native Categories -->
+    <li class="treeview" id="sidebar-native-category">
         <a href="#">
-            <i class="fa fa-link"></i> <span>چند سطحی</span>
+            <i class="fa fa-link"></i> <span>دسته بندی ها</span>
             <span class="pull-left-container">
                 <i class="fa fa-angle-right pull-left"></i>
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="#">لینک سطح ۱</a></li>
-            <li><a href="#">لینک سطح ۱</a></li>
+            <li><a asp-controller="NativeCategory" asp-action="Index">همه دسته بندی ها</a></li>
+            <li><a asp-controller="NativeCategory" asp-action="Create">افزودن دسته بندی</a></li>
         </ul>
     </li>
 </ul>
