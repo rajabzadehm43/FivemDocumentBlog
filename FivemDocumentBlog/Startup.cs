@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Data;
 using FivemDocumentBlog.DataBaseConfig;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models.DataModels;
@@ -30,6 +31,7 @@ namespace FivemDocumentBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
 
             #region Database Configuration
 
@@ -46,6 +48,18 @@ namespace FivemDocumentBlog
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                options.ValidationInterval = TimeSpan.Zero;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Login";
+                options.LogoutPath = "/Logout";
+                options.AccessDeniedPath = "/AccessDenied";
+            });
+
             #endregion
 
             #region Inversion Of Control
@@ -57,7 +71,6 @@ namespace FivemDocumentBlog
 
             #endregion
 
-            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,8 +90,11 @@ namespace FivemDocumentBlog
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,0 +1,32 @@
+﻿@model ViewModels.Authentication.LoginUserViewModel
+
+@{
+    ViewData["Title"] = "ورود به سایت";
+}
+
+<h2>ورود به سایت</h2>
+
+<div class="container">
+    
+    <form method="post">
+        
+        <div class="form-group">
+            <label asp-for="UsernameOrEmail"></label>
+            <input asp-for="UsernameOrEmail" class="form-control"/>
+            <span asp-validation-for="UsernameOrEmail" class="text-danger text-sm"></span>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control"/>
+            <span asp-validation-for="Password" class="text-danger text-sm"></span>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="ورود" class="btn btn-success btn-block"/>
+        </div>
+
+    </form>
+
+</div>
+

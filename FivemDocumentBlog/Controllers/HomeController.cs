@@ -7,11 +7,17 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Transactions;
 using Dapper;
 using DataLayer.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Models.DataModels;
 using Models.DocsModels;
 using Services.Interfaces.Docs;
 
@@ -26,13 +32,16 @@ namespace FivemDocumentBlog.Controllers
         private readonly IDbConnection _db;
         private readonly INativeTagService _tagService;
 
-        public HomeController(ILogger<HomeController> logger, INativeService service, ApplicationDbContext context, IDbConnection db, INativeTagService tagService)
+        private readonly SignInManager<AppUser> _signInManager;
+
+        public HomeController(ILogger<HomeController> logger, INativeService service, ApplicationDbContext context, IDbConnection db, INativeTagService tagService, SignInManager<AppUser> signInManager)
         {
             _logger = logger;
             _service = service;
             _context = context;
             _db = db;
             _tagService = tagService;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
