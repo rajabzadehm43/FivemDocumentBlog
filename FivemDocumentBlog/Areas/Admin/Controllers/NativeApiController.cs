@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Services.Interfaces.Docs;
 using ViewModels.Admin.Docs.NativeApiSet;
 
 namespace FivemDocumentBlog.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class NativeApiController : Controller
     {

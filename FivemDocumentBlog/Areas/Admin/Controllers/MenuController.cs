@@ -10,7 +10,7 @@ using ViewModels.Admin.Menus;
 
 namespace FivemDocumentBlog.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class MenuController : Controller
     {

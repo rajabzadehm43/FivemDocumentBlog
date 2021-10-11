@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Services.Interfaces.Docs;
 using ViewModels.Admin.Docs.NativeCategory;
 
 namespace FivemDocumentBlog.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class NativeCategoryController : Controller
     {
