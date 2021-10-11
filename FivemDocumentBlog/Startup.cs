@@ -15,7 +15,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models.DataModels;
 using Services.Interfaces.Docs;
+using Services.Interfaces.General;
 using Services.Services.Docs;
+using Services.Services.General;
 
 namespace FivemDocumentBlog
 {
@@ -68,6 +70,7 @@ namespace FivemDocumentBlog
             services.AddScoped<INativeApiService, NativeApiService>();
             services.AddScoped<INativeCategoryService, NativeCategoryService>();
             services.AddScoped<INativeTagService, NativeTagService>();
+            services.AddScoped<IMenuService, MenuService>();
 
             #endregion
 

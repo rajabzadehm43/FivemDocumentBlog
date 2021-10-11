@@ -11,7 +11,9 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Docs\" />
+    <Folder Include="Interfaces\General\" />
     <Folder Include="Services\Docs\" />
+    <Folder Include="Services\General\" />
   </ItemGroup>
 
   <ItemGroup>

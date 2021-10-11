@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Models.DataModels;
 using Models.DocsModels;
+using Models.GeneralModels;
 
 namespace DataLayer.Data
 {
@@ -16,6 +17,7 @@ namespace DataLayer.Data
         public DbSet<NativeApiSet> NativeApiSets { get; set; }
         public DbSet<NativeCategory> NativeCategories { get; set; }
         public DbSet<NativeTag> NativeTags { get; set; }
+        public DbSet<Menu> Menus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,0 +1,54 @@
+﻿@model IList<Models.GeneralModels.Menu>
+
+@{
+    ViewData["Title"] = "منو ها";
+    ViewData["Menu-Title"] = "همه منو ها";
+    var index = 1;
+}
+
+@section Router
+{
+    <li><a href="/Admin/"><i class="fa fa-dashboard"></i> خانه</a></li>
+    <li><a asp-area="Admin" asp-controller="Menu" asp-action="Index"> منو ها</a></li>
+    <li class="active">همه منو ها </li>
+}
+
+<div class="box box-info">
+    
+    <div class="box-header">
+        <h3 class="box-title">همه منو ها</h3>
+    </div>
+    
+    <div class="box-body">
+        
+        <table class="table table-bordered table-hover">
+            <tbody>
+            <tr>
+                <th style="width: 10px">#</th>
+                <th>متن منو</th>
+                <th>Target</th>
+                <th>Rel</th>
+                <th>فعالیت</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@item.Title</td>
+                    <td>@item.Target</td>
+                    <td>@item.Rel</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MenuId" class="btn btn-warning btn-sm">ویرایش</a> |
+                        <a asp-action="Remove" asp-route-id="@item.MenuId" class="btn btn-danger btn-sm">حذف</a>
+                    </td>
+                </tr>
+                index++;
+            }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+

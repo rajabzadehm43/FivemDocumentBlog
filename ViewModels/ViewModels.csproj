@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Admin\Menus\" />
     <Folder Include="Docs\" />
   </ItemGroup>
 

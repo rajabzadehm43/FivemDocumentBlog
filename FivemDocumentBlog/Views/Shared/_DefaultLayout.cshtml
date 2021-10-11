@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Services.Interfaces.General
+@inject IMenuService _menuService
+
+@{
+    var menus = await _menuService.GetMenusAsync();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -44,17 +51,15 @@
 
                 <div class="menu-list-parent">
                     <ul class="menu-list-container" id="menu-list">
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
+                        @foreach (var item in menus)
+                        {
+                            <li class="menu-list-item">
+                                <a class="text-decoration-none" 
+                                   @(item.Target != null ? $"target=\"{item.Target}\"" : "") 
+                                   @(item.Rel != null ? $"rel=\"{item.Rel}\"" : "")
+                                   href="@item.TargetUrl">@item.Title</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>

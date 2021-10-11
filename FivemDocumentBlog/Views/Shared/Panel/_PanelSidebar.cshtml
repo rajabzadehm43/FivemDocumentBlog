@@ -51,4 +51,21 @@
             <li><a asp-controller="NativeCategory" asp-action="Create">افزودن دسته بندی</a></li>
         </ul>
     </li>
+
+    <li class="header">تنظیمات عمومی</li>
+
+    <!-- Natives -->
+    <li class="treeview" id="sidebar-native">
+        <a href="#">
+            <i class="fa fa-link"></i> <span>منو</span>
+            <span class="pull-left-container">
+                <i class="fa fa-angle-right pull-left"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a asp-controller="Menu" asp-action="Index">همه منو ها</a></li>
+            <li><a asp-controller="Menu" asp-action="Create">افزودن منو</a></li>
+        </ul>
+    </li>
+
 </ul>
