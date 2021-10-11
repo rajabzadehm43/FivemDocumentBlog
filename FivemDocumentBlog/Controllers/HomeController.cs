@@ -26,7 +26,7 @@ namespace FivemDocumentBlog.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly INativeService _service;
+        private readonly INativeService _nativeService;
 
         private readonly ApplicationDbContext _context;
         private readonly IDbConnection _db;
@@ -34,24 +34,30 @@ namespace FivemDocumentBlog.Controllers
 
         private readonly SignInManager<AppUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger, INativeService service, ApplicationDbContext context, IDbConnection db, INativeTagService tagService, SignInManager<AppUser> signInManager)
+        public HomeController(ILogger<HomeController> logger, INativeService nativeService, ApplicationDbContext context, IDbConnection db, INativeTagService tagService, SignInManager<AppUser> signInManager)
         {
             _logger = logger;
-            _service = service;
+            _nativeService = nativeService;
             _context = context;
             _db = db;
             _tagService = tagService;
             _signInManager = signInManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string q = "")
         {
-            return View();
+            if (q == null) return RedirectToAction("Index");
+            var natives = await _nativeService.GetNativesAsync(q);
+            ViewData["q"] = q;
+            return View(natives);
         }
 
         public async Task<IActionResult> Privacy()
         {
-            return View();
+            var result = _db.Query("Select N.* From NativeTags As T Left Join Natives As " +
+                                   "N On N.NativeId = T.NativeId Where T.Tag = @q",
+                new { q = "ثبت دستور" });
+            return Ok(result);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,6 +1,7 @@
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    font-family: "IRANsans";
 }
 
 html {
@@ -26,6 +27,33 @@ header {
 .head-info {
   color: #636363;
   margin-right: 10px;
+}
+
+.search-container {
+    height: 100%;
+    position: relative;
+}
+
+.search-submit {
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    height: 100%;
+    width: 45px;
+    color: #0d6efd;
+}
+
+.search-input {
+    padding-right: 45px !important;
+    text-align: left;
+    direction: ltr;
+}
+
+.search-submit > i {
+    transform: translateY(2px);
 }
 
 @media (max-width: 490px) {
@@ -139,16 +167,25 @@ header {
   padding: 20px;
 }
 
+.native-title-container {
+    height: 23px;
+}
+
+.native-title {
+    display: inline-block;
+    margin: 0;
+}
+
 .function-name {
-  text-align: left;
-  font-family: consolas;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 1px 0px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  direction: ltr;
+    text-align: left;
+    font-family: consolas;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 1px 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    direction: ltr;
 }
 .function-name a {
   color: #030303;
@@ -182,38 +219,43 @@ header {
   border-radius: 18px;
 }
 
+.function-details-item-name {
+    font-weight: normal !important;
+    font-family: "consolas"
+}
+
 .info.function-details-item-name {
-  outline: 2px solid #0dcaf0;
-  color: #0dcaf0;
+    outline: 1px solid #0dcaf0;
+    color: #0dcaf0;
 }
 
 .green.function-details-item-name {
-  outline: 2px solid #02b65c;
+  outline: 1px solid #02b65c;
   color: #02b65c;
 }
 
 .primery.function-details-item-name {
-  outline: 2px solid #0d6efd;
+  outline: 1px solid #0d6efd;
   color: #0d6efd;
 }
 
 .warning.function-details-item-name {
-  outline: 2px solid #ffc107;
+  outline: 1px solid #ffc107;
   color: #ffc107;
 }
 
 .danger.function-details-item-name {
-  outline: 2px solid #dc3545;
+  outline: 1px solid #dc3545;
   color: #dc3545;
 }
 
 .succses.function-details-item-name {
-  outline: 2px solid #198754;
+  outline: 1px solid #198754;
   color: #198754;
 }
 
 .yellow.function-details-item-name {
-  outline: 2px solid #C4BC1E;
+  outline: 1px solid #C4BC1E;
   color: #C4BC1E;
 }
 
@@ -264,11 +306,6 @@ header {
   border-radius: 5px;
 }
 
-.profile-info {
-  width: calc(100% - 70px);
-  padding-right: 10px;
-  margin-top: 26px;
-}
 .profile-info .profile-info-name, .profile-info .profile-info-skill {
   overflow: hidden;
   text-overflow: ellipsis;

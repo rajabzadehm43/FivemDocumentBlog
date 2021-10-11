@@ -8,7 +8,10 @@ using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Transactions;
 using Dapper;
+using DataLayer.Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Models.DataModels;
 using Models.DocsModels;
 using Services.Interfaces.Docs;
 using ViewModels.Docs;
@@ -23,10 +26,13 @@ namespace Services.Services.Docs
 
         private readonly INativeTagService _tagService;
 
-        public NativeService(IDbConnection db, INativeTagService tagService) : this()
+        private readonly ApplicationDbContext _context;
+
+        public NativeService(IDbConnection db, INativeTagService tagService, ApplicationDbContext context) : this()
         {
             _db = db;
             _tagService = tagService;
+            _context = context;
         }
 
         private NativeService()
@@ -42,10 +48,21 @@ namespace Services.Services.Docs
 
         }
 
-        public async Task<List<Native>> GetNativesAsync()
+        public async Task<List<Native>> GetNativesAsync(string q = "")
         {
-            var query = "Select * From Natives";
-            return _db.Query<Native>(query).ToList();
+            var query = "Select * From Natives Where NativeName Like '%'+@q+'%';" +
+                        "Select N.* From NativeTags As T Left Join Natives As " +
+                        "N On N.NativeId = T.NativeId Where T.Tag = @q";
+
+
+            List<Native> final = new List<Native>();
+            using (var result = _db.QueryMultiple(query, new { q }))
+            {
+                final.AddRange(result.Read<Native>());
+                final.AddRange(result.Read<Native>());
+            }
+
+            return final.Distinct().ToList();
         }
 
         public async Task<List<Native>> GetTopNativesAsync(int take = 10)
@@ -59,6 +76,44 @@ namespace Services.Services.Docs
             var query = "Select * From Natives Where NativeId = @Id";
             var result = await _db.QueryFirstAsync<Native>(query, new { Id = id });
             return result;
+        }
+
+        public async Task<Native> GetNativeWithAllRelationsById(int id)
+        {
+            var query =
+                "Select N.*, T.*, A.*, C.*, U.* From Natives As N " +
+                "Left Join NativeTags As T On N.NativeId = T.NativeId " +
+                "Left Join NativeApiSets As A On N.ApiSetId = A.ApiSetId " +
+                "Left Join NativeCategories As C On N.CategoryId = C.CategoryId " +
+                "Left Join AspNetUsers As U On N.AuthorId = U.Id " +
+                "Where N.NativeId = @id";
+
+            var nativeDict = new Dictionary<int, Native>();
+
+            var result = _db.Query<Native, NativeTag, NativeApiSet,
+                NativeCategory, AppUser, Native>(query,param:new {id}, map: (native, tag, api, cat, author) =>
+            {
+
+                if (!nativeDict.TryGetValue(native.NativeId, out var cNative))
+                {
+                    cNative = native;
+                    cNative.Tags = new List<NativeTag>();
+                    nativeDict.Add(native.NativeId, cNative);
+                }
+
+                cNative.ApiSet = api;
+                cNative.Category = cat;
+                cNative.Author = author;
+                cNative.Tags.Add(tag);
+
+                return cNative;
+            }, splitOn:"ApiSetId,CategoryId,Id");
+
+            return result.FirstOrDefault();
+            /*return _context.Natives
+                .Include(n => n.ApiSet)
+                .Include(n => n.Category)
+                .SingleOrDefault(n => n.NativeId == id);*/
         }
 
         public async Task<Tuple<List<Native>, int>> GetNativesByPagingAsync(string q = "", int take = 10, int skip = 0)
@@ -92,8 +147,8 @@ namespace Services.Services.Docs
 
         public async Task AddNativeAsync(Native native)
         {
-            var query = "Insert Into Natives (ImageName, NativeName, ShortDescription, Description, SampleCode, ApiSetId, CategoryId) " +
-                        "VALUES (@ImageName, @NativeName, @ShortDescription, @Description, @SampleCode, @ApiSetId, @CategoryId);"
+            var query = "Insert Into Natives (ImageName, NativeName, ShortDescription, Description, SampleCode, ApiSetId, CategoryId, AuthorId) " +
+                        "VALUES (@ImageName, @NativeName, @ShortDescription, @Description, @SampleCode, @ApiSetId, @CategoryId, @AuthorId);"
                 + "Select Cast(SCOPE_IDENTITY() As int);";
 
             var result = await _db.QueryFirstAsync<int>(query, native);
@@ -101,7 +156,7 @@ namespace Services.Services.Docs
             native.NativeId = result;
         }
 
-        public async Task<Native> AddNativeAsync(AdminAddNativeViewModel model)
+        public async Task<Native> AddNativeAsync(AdminAddNativeViewModel model, string authorId)
         {
 
             // Create New Native
@@ -112,7 +167,8 @@ namespace Services.Services.Docs
                 NativeName = model.NativeName,
                 SampleCode = model.SampleCode,
                 ApiSetId = model.ApiSetId.Value,
-                CategoryId = model.CategoryId.Value
+                CategoryId = model.CategoryId.Value,
+                AuthorId = authorId
             };
 
             // Image Process [Currently Not Have Image]
@@ -218,8 +274,9 @@ namespace Services.Services.Docs
 
         public async Task RemoveNative(int id)
         {
-            var query = "Delete From Natives Where NativeId = @NativeId";
-            await _db.ExecuteAsync(query, new { NativeId = id });
+            var query = "Delete From NativeTags Where NativeId = @id;" + 
+                "Delete From Natives Where NativeId = @id;";
+            await _db.ExecuteAsync(query, new { id });
         }
     }
 }

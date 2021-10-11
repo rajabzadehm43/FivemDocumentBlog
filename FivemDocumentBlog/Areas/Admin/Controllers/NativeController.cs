@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using FivemDocumentBlog.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.DocsModels;
@@ -74,7 +75,7 @@ namespace FivemDocumentBlog.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            await _nativeService.AddNativeAsync(model);
+            await _nativeService.AddNativeAsync(model, User.GetUserId());
             return RedirectToAction("Index");
         }
 

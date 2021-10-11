@@ -8,45 +8,57 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link rel="stylesheet" href="./font/fonts.css">
-    <link rel="stylesheet" href="./font/font-uni.css">
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="~/font/fonts.css">
+    <link rel="stylesheet" href="~/font/font-uni.css">
+    <link rel="stylesheet" href="~/style/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     @RenderSection("Header", false)
 </head>
 
 <body device="PC">
+
     <header>
-        <div class="header-head">
-            <span class="text-discord text-25 heade-logo">5 Developer</span>
-            <span class="text-14 head-info">کامل ترین و اولین مرجع مستندات فایوم در ایران</span>
-        </div>
-        <nav class="menu-list">
-
-            <button class="toogle-menu-list" id="btn-toggle-menu-list"><i class="fas fa-bars"></i></button>
-
-            <div class="menu-list-parent">
-                <ul class="menu-list-container" id="menu-list">
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
-                    <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
-                </ul>
+        <div class="container">
+            <div class="header-head">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <span class="text-discord text-25 heade-logo">5 Developer</span>
+                        <span class="text-14 head-info">کامل ترین و اولین مرجع مستندات فایوم در ایران</span>
+                    </div>
+                    <div class="col-12 col-md-6 mt-3 mt-md-0">
+                        <form method="get">
+                            <div class="search-container">
+                                <input name="q" value="@ViewData["q"]" type="text" placeholder="Can You Search ? You Can Test It ..." class="form-control search-input">
+                                <button type="submit" class="search-submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </nav>
+            <nav class="menu-list">
+
+                <button class="toogle-menu-list" id="btn-toggle-menu-list"><i class="fas fa-bars"></i></button>
+
+                <div class="menu-list-parent">
+                    <ul class="menu-list-container" id="menu-list">
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">درباره ما</a></li>
+                        <li class="menu-list-item"><a class="text-decoration-none" href="#null">صفحه اصلی</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </header>
 
     @RenderBody()
@@ -60,7 +72,8 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="~/js/site.js"></script>
 <script>
     function toggleCard(card) {
         $("[des-id=" + card.getAttribute("item-id") + "]").slideToggle();

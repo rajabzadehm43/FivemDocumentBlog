@@ -1,172 +1,79 @@
-﻿@{
+﻿@model List<Models.DocsModels.Native>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<section class="container">
+<section id="container" class="container">
     <div class="row">
-        <div class="col-12 col-lg-6 col-xl-4 mt-4">
-            <div class="box-shadow" id="1">
-                <div class="d-flex box-shadow-header">
-                    <div class="function-details w-50">
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge yellow">
-                                SERVER
-                            </div>
 
-                        </div>
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge green">
-                                VEHICLE
-                            </div>
-
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-lg-6 col-xl-4 mt-4">
+                <div class="box-shadow" id="@item.NativeId">
+                    <div class="box-shadow-header">
+                        <div class="w-100 native-title-container" dir="ltr">
+                            <h3 class="function-name native-title" data-bs-toggle="tooltip" data-bs-placement="top" title="@item.NativeName">
+                                @item.NativeName
+                            </h3>
                         </div>
                     </div>
-                    <div class="function-name w-50">
-                        RegisterCommand
+                    <div class="box-shadow-line"></div>
+                    <div class="box-shadow-body">
+                        <div class="function-description" des-id="@item.NativeId">
+                            @item.ShortDescription
+                        </div>
                     </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-body">
-                    <div class="function-description" des-id="1">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                        چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در
-                        شصت و سه درصد گذشته حال و آینده
-                    </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-footer d-flex">
-                    <div class="function-more w-50">
-                        <a href="#" class="text-decoration-none">مشاهده بیشتر</a>
-                    </div>
-                    <div class="function-short-des text-lg-start w-50">
-                        <a class="text-decoration-none" item-id="1" onclick="toggleCard(this)">توضیح کوتاه</a>
+                    <div class="box-shadow-line"></div>
+                    <div class="box-shadow-footer d-flex">
+                        <div class="function-more w-50">
+                            <a asp-controller="Native" asp-action="Single" asp-route-id="@item.NativeId" class="text-decoration-none">مشاهده بیشتر</a>
+                        </div>
+                        <div class="function-short-des text-lg-start w-50">
+                            <a class="text-decoration-none" item-id="@item.NativeId" onclick="toggleCard(this)">توضیح کوتاه</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-lg-6 col-xl-4 mt-4">
-            <div class="box-shadow" id="3">
-                <div class="d-flex box-shadow-header">
-                    <div class="function-details w-50">
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge yellow">
-                                SERVER
-                            </div>
 
-                        </div>
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge green">
-                                VEHICLE
-                            </div>
+        }
 
-                        </div>
-                    </div>
-                    <div class="function-name w-50">
-                        RegisterCommand
-                    </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-body">
-                    <div class="function-description" des-id="3">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                        چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در
-                        شصت و سه درصد گذشته حال و آینده
-                    </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-footer d-flex">
-                    <div class="function-more w-50">
-                        <a href="#" class="text-decoration-none">مشاهده بیشتر</a>
-                    </div>
-                    <div class="function-short-des text-lg-start w-50">
-                        <a class="text-decoration-none" item-id="3" onclick="toggleCard(this)">توضیح کوتاه</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-6 col-xl-4 mt-4">
-            <div class="box-shadow" id="4">
-                <div class="d-flex box-shadow-header">
-                    <div class="function-details w-50">
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge yellow">
-                                SERVER
-                            </div>
-
-                        </div>
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge green">
-                                VEHICLE
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="function-name w-50">
-                        RegisterCommand
-                    </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-body">
-                    <div class="function-description" des-id="4">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                        چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در
-                        شصت و سه درصد گذشته حال و آینده
-                    </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-footer d-flex">
-                    <div class="function-more w-50">
-                        <a href="#" class="text-decoration-none">مشاهده بیشتر</a>
-                    </div>
-                    <div class="function-short-des text-lg-start w-50">
-                        <a class="text-decoration-none" item-id="4" onclick="toggleCard(this)">توضیح کوتاه</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-6 col-xl-4 mt-4">
-            <div class="box-shadow" id="5">
-                <div class="d-flex box-shadow-header">
-                    <div class="function-details w-50">
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge yellow">
-                                SERVER
-                            </div>
-
-                        </div>
-                        <div class="function-details-item ">
-                            <div class="function-details-item-name badge green">
-                                VEHICLE
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="function-name w-50">
-                        RegisterCommand
-                    </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-body">
-                    <div class="function-description" des-id="5">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است
-                        چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در
-                        شصت و سه درصد گذشته حال و آینده
-                    </div>
-                </div>
-                <div class="box-shadow-line"></div>
-                <div class="box-shadow-footer d-flex">
-                    <div class="function-more w-50">
-                        <a href="#" class="text-decoration-none">مشاهده بیشتر</a>
-                    </div>
-                    <div class="function-short-des text-lg-start w-50">
-                        <a class="text-decoration-none" item-id="5" onclick="toggleCard(this)">توضیح کوتاه</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+    <div id="ob-criterion"></div>
+
 </section>
+
+@section Scripts
+{
+    @*<script>
+
+            let rowEl = document.getElementById("container");
+
+            console.log("Row",rowEl);
+
+            let options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.25
+            }
+
+            let callback = (entries, observer) => {
+                console.log("step 1");
+                entries.forEach(entry => {
+                    console.log("step 2");
+                    if (entry.isIntersecting) {
+                        // do some magic here
+                        console.log('step 3');
+                    }
+                    // and some other methods
+                })
+            }
+
+
+            let observer = new IntersectionObserver(callback, options);
+
+            let target = document.querySelector("#ob-criterion");
+            observer.observe(target);
+
+        </script>*@
+}

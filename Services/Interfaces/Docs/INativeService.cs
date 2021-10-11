@@ -10,14 +10,15 @@ namespace Services.Interfaces.Docs
 {
     public interface INativeService
     {
-        Task<List<Native>> GetNativesAsync();
+        Task<List<Native>> GetNativesAsync(string q = "");
         Task<List<Native>> GetTopNativesAsync(int take = 10);
         Task<Native> GetNativeByIdAsync(int id);
+        Task<Native> GetNativeWithAllRelationsById(int id);
         Task<Tuple<List<Native>, int>> GetNativesByPagingAsync(string q = "", int take=10, int skip = 0);
 
 
         Task AddNativeAsync(Native native);
-        Task<Native> AddNativeAsync(AdminAddNativeViewModel model);
+        Task<Native> AddNativeAsync(AdminAddNativeViewModel model, string authorId);
         Task<Tuple<string, string>> SaveNativeDescriptionFile(IFormFile file);
 
         Task UpdateNativeAsync(Native native);

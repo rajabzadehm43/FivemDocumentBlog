@@ -1,3 +1,27 @@
 .box-shadow-line {
   height: 2.5px !important;
 }/*# sourceMappingURL=single.css.map */
+
+.sample-code {
+    font-family: consolas;
+    background: whitesmoke;
+}
+
+.tags-container a {
+    background-color: #f1f5f8;
+    margin: 3px 1px;
+    font-size: 13px;
+    color: #1e2f38;
+    padding: 3px 6px;
+    line-height: 18px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color .2s;
+}
+
+    .tags-container a:hover {
+        background-color: #dce4e9;
+    }

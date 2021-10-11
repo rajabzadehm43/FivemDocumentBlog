@@ -27,5 +27,16 @@ namespace FivemDocumentBlog.Controllers
             return Ok(data);
         }
 
+        [Route("[controller]/[action]/{id}/{name?}")]
+        public async Task<IActionResult> Single(int id, string name)
+        {
+            var native = await _nativeService.GetNativeWithAllRelationsById(id);
+
+            if (native.NativeName.Replace(" ", "-") != name) 
+                return RedirectToAction("Single", new {id, name = native.NativeName.Replace(" ", "-")});
+            
+            return View(native);
+        }
+
     }
 }

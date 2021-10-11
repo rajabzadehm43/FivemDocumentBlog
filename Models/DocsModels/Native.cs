@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Models.DataModels;
 
 namespace Models.DocsModels
 {
@@ -13,6 +14,10 @@ namespace Models.DocsModels
 
         [Required]
         public int CategoryId { get; set; }
+
+        [Required]
+        [MaxLength(450)]
+        public string AuthorId { get; set; }
 
         [MaxLength(50)]
         public string ImageName { get; set; }
@@ -37,6 +42,8 @@ namespace Models.DocsModels
         public NativeCategory Category { get; set; }
 
         public List<NativeTag> Tags { get; set; }
+
+        public AppUser Author { get; set; }
 
         #endregion
 

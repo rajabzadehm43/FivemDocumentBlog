@@ -1,0 +1,112 @@
+﻿@model Models.DocsModels.Native
+@{
+    ViewData["Title"] = Model.NativeName;
+}
+
+@section Header
+{
+    <link href="~/style/single.css" rel="stylesheet" />
+}
+
+<section class="container">
+    <div class="row">
+        <div class="col-12 col-lg-3 mt-4">
+            <div class="box-shadow">
+                <div class="p-20">
+                    <div class="sidebar-profile-container">
+                        <div class="profile-info px-1">
+                            <div class="profile-info-name">@Model.Author.DisplayName</div>
+                            <div class="profile-info-skill">عضو تیم فنی سایت</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-shadow mt-4">
+                <div class="p-20">
+                    <div class="text-center quistion">
+                        آیا این مطلب برای شما مفید بود ؟
+                    </div>
+                </div>
+                <div class="box-shadow-line"></div>
+                <div class="p-20">
+                    <div class="d-flex">
+                        <div class="w-50 pl-1">
+                            <button class="p-3 w-100 quistion-btn quistion-btn-ok" data-bs-toggle="tooltip" data-bs-placement="top" title="بله مفید بود">بله مفید بود</button>
+                        </div>
+                        <div class="w-50 pr-1">
+                            <button class="p-3 w-100 quistion-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="اصلا مفید نبود">اصلا مفید نبود</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="box-shadow mt-4">
+                <div class="p-20">
+                    <div class="text-center quistion">
+                        برچسب ها
+                    </div>
+                </div>
+                <div class="box-shadow-line"></div>
+                <div class="p-3 tags-container">
+                    @foreach (var item in Model.Tags)
+                    {
+                        <a href="#">@item.Tag</a>
+                    }
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-9 mt-4 mb-4">
+            <div class="box-shadow pb-3">
+                <div class="p-20">
+                    <div class="box-header p-3">
+                        <button class="shair-btn-parent" id="copy-to-clip">
+                            <img src="~/image/shaire.svg" alt="icon">
+                            <span class="top-shair">کپی لینک این صفحه</span>
+                        </button>
+                        <div class="box-header-title">@Model.NativeName</div>
+                    </div>
+                    <div class="d-flex mt-3">
+                        <div class="function-details-item">
+                            <div class="function-details-item-name badge yellow">
+                                @Model.ApiSet.Name
+                            </div>
+                        </div>
+                        <div class="function-details-item">
+                            <div class="function-details-item-name badge green">
+                                @Model.Category.CategoryName
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-shadow-line"></div>
+                <div class="p-20">
+                    <div class="singe-body">
+                        <div class="single-body-text">
+                            @Html.Raw(@Model.Description)
+                        </div>
+                    </div>
+                </div>
+                <div class="box-shadow-line"></div>
+                <pre class="p-20 text-left sample-code m-3 mb-0" dir="ltr">@Model.SampleCode</pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<input type="hidden" id="href-page" />
+
+@section Scripts
+{
+    <script>
+        $("#href-page").val(window.location.href);
+        $("#copy-to-clip").click(function() {
+            var copyText = document.getElementById("href-page");
+            copyText.select();
+            navigator.clipboard.writeText(copyText.value);
+            alert("Copied the text: " + copyText.value);
+        })
+    </script>
+}
