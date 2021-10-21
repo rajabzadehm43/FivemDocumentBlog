@@ -38,5 +38,14 @@ namespace FivemDocumentBlog.Controllers
             return View(native);
         }
 
+        #region Link Shorter
+
+        [Route("n/{id}")]
+        public async Task<IActionResult> ShortLink(int id)
+        {
+            return RedirectToAction("Single", new {id});
+        }
+
+        #endregion
     }
 }

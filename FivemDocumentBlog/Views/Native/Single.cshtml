@@ -1,7 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
+@using Models.DocsModels
 @model Models.DocsModels.Native
 @{
-    ViewData["Title"] = Model.NativeName;
+    ViewData["Title"] = "توضیحات و مثال برای " + Model.NativeName;
+    Model.Tags.Add(new NativeTag
+    {
+        NativeId = Model.NativeId,
+        Tag = "آموزش استفاده از " + Model.NativeName + "در فایوم"
+    });
 }
 
 @section Header
@@ -109,12 +115,12 @@
     </div>
 </section>
 
-<input type="hidden" id="href-page" />
+<input type="hidden" value="https://5developer.com/n/@Model.NativeId" id="href-page" />
 
 @section Scripts
 {
     <script>
-        $("#href-page").val(window.location.href);
+        //$("#href-page").val(window.location.href);
         $("#copy-to-clip").click(function() {
             var copyText = document.getElementById("href-page");
             copyText.select();
