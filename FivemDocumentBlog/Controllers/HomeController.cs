@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using Dapper;
@@ -56,10 +57,14 @@ namespace FivemDocumentBlog.Controllers
 
         public async Task<IActionResult> Privacy()
         {
-            var result = _db.Query("Select N.* From NativeTags As T Left Join Natives As " +
-                                   "N On N.NativeId = T.NativeId Where T.Tag = @q",
-                new { q = "ثبت دستور" });
-            return Ok(result);
+            return View();
+        }
+
+        [Route("sitemap.xml")]
+        public async Task<IActionResult> SiteMap()
+        {
+            var natives = await _nativeService.GetNativesWithoutRelAsync();
+            return View(natives);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

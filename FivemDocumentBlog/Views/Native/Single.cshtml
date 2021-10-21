@@ -8,7 +8,9 @@
 {
     <link href="~/style/single.css" rel="stylesheet" />
     
+    <meta rel="canonical" href="https://5developer.com/Native/@Model.NativeId/@Model.NativeName.Replace(" ", "-")"/>
     <meta name="description" content="@Model.ShortDescription" />
+    <meta name="keywords" content="@string.Join(", ", Model.Tags.Select(t => t.Tag))"/>
 
     <!-- Open Graph Data -->
     <meta property="og:site_name" content="فایوم دولوپر"/>

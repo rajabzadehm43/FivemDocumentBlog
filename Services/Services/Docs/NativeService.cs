@@ -48,6 +48,13 @@ namespace Services.Services.Docs
 
         }
 
+        public async Task<List<Native>> GetNativesWithoutRelAsync()
+        {
+            var query = "Select * From Natives";
+
+            return _db.Query<Native>(query).ToList();
+        }
+
         public async Task<List<Native>> GetNativesAsync(string q = "")
         {
             var query = "Select * From Natives Where NativeName Like '%'+@q+'%' Order By NativeName;" +

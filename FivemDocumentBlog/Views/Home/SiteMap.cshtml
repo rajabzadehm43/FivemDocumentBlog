@@ -1,0 +1,24 @@
+﻿@model List<Models.DocsModels.Native>
+@{
+    Layout = null;
+}
+
+<?xml version="1.0" encoding="utf-8" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <url>
+        <loc>https://5developer.com/</loc>
+        <lastmod>@DateTime.Now</lastmod>
+        <priority>1.00</priority>
+    </url>
+    
+    @foreach (var item in Model)
+    {
+        <url>
+            <loc>https://5developer.com/Native/@item.NativeId/@item.NativeName.Replace(" ", "-")</loc>
+            <lastmod>@DateTime.Now</lastmod>
+            <priority>0.80</priority>
+        </url>
+    }
+
+</urlset>

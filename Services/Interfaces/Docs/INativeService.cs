@@ -10,6 +10,7 @@ namespace Services.Interfaces.Docs
 {
     public interface INativeService
     {
+        Task<List<Native>> GetNativesWithoutRelAsync();
         Task<List<Native>> GetNativesAsync(string q = "");
         Task<List<Native>> GetTopNativesAsync(int take = 10);
         Task<Native> GetNativeByIdAsync(int id);
