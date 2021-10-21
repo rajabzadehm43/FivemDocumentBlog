@@ -1,4 +1,5 @@
-﻿@model Models.DocsModels.Native
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@model Models.DocsModels.Native
 @{
     ViewData["Title"] = Model.NativeName;
 }
@@ -6,6 +7,16 @@
 @section Header
 {
     <link href="~/style/single.css" rel="stylesheet" />
+    
+    <meta name="description" content="@Model.ShortDescription" />
+
+    <!-- Open Graph Data -->
+    <meta property="og:site_name" content="فایوم دولوپر"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="توضیحات کامل @Model.NativeName"/>
+    <meta property="og:description" content="@Model.ShortDescription"/>
+    <meta property="og:url" content="@Context.Request.GetDisplayUrl()"/>
+
 }
 
 <section class="container">

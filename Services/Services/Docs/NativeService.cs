@@ -50,9 +50,9 @@ namespace Services.Services.Docs
 
         public async Task<List<Native>> GetNativesAsync(string q = "")
         {
-            var query = "Select * From Natives Where NativeName Like '%'+@q+'%';" +
+            var query = "Select * From Natives Where NativeName Like '%'+@q+'%' Order By NativeName;" +
                         "Select N.* From NativeTags As T Left Join Natives As " +
-                        "N On N.NativeId = T.NativeId Where T.Tag = @q";
+                        "N On N.NativeId = T.NativeId Where T.Tag = @q Order By N.NativeName";
 
 
             List<Native> final = new List<Native>();

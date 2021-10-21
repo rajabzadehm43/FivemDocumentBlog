@@ -27,7 +27,7 @@ namespace FivemDocumentBlog.Controllers
             return Ok(data);
         }
 
-        [Route("[controller]/[action]/{id}/{name?}")]
+        [Route("Native/{id}/{name?}")]
         public async Task<IActionResult> Single(int id, string name)
         {
             var native = await _nativeService.GetNativeWithAllRelationsById(id);

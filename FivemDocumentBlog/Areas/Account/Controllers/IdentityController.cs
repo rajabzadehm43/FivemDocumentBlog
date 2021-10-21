@@ -102,7 +102,7 @@ namespace FivemDocumentBlog.Areas.Account.Controllers
                 }
             }
 
-            var tryLog = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+            var tryLog = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
 
             if (tryLog.Succeeded)
             {

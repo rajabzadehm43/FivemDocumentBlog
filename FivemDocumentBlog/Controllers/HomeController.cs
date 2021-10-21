@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using Dapper;
 using DataLayer.Data;
+using Flurl.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using Models.DataModels;
 using Models.DocsModels;
 using Services.Interfaces.Docs;
+using ViewModels;
 
 namespace FivemDocumentBlog.Controllers
 {
